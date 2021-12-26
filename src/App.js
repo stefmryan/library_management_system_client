@@ -5,15 +5,10 @@ import LandingPage from './components/pages/LandingPage/LandingPage';
 function App() {
   return (
     <Router>
-      
       <Routes>
-      
       <Route exact path="/" element={<LandingPage />}/>
-      
       </Routes>
-      
     </Router>
-
   );
 }
 
