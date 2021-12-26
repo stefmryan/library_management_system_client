@@ -1,15 +1,20 @@
 import React from "react";
+import {Link} from 'react-router-dom';
 
 
 const LandingPage = () => {
 
-    const handleBtn = () =>{
-        console.log("Clicked btn");
-    }
+    // const handleBtn = () =>{
+    //     console.log("Clicked btn");
+    // }
     return(
     <div>
+        <div>
         This is the LandingPage
-        <button onClick={handleBtn}>Click Me</button>
+        </div>
+        <div>
+        <Link to="/register">Click Me</Link>
+        </div>
     </div>
     )
 }
