@@ -1,8 +1,8 @@
-import React /*{ useState }*/ from "react";
+import React, { useState } from "react";
 import constants from "../utilities/constants";
 
 const LibraryAccountForm = () => {
-  /*const [accountObj, setAccountObj] = useState({
+  const [accountObj, setAccountObj] = useState({
     libraryAccountNumber: 0,
     email: "",
     handle: "",
@@ -22,43 +22,59 @@ const LibraryAccountForm = () => {
     accountType: {
       label: "",
     },
-  });*/
+  });
 
-  const handleInput = () => {
-    console.log("This is input");
+  //   const [label, setLabel] = useState({
+  //     label: "",
+  //   });
+
+  const handleInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setAccountObj({ ...accountObj, [name]: value });
   };
 
-  const handleSelect = () => {
-    console.log("This is select");
+  const handleSelect = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    //setLabel({ label: value });
+    setAccountObj({ ...accountObj, [name]: { label: value } });
+  };
+
+  const handleForm = (e) => {
+    e.preventDefault();
+    console.log(accountObj);
   };
   return (
     <div>
       <form>
         <label>
           First Name
-          <input type="text" onChange={handleInput} />
+          <input name="firstName" type="text" onChange={handleInput} />
         </label>
         <label>
           {" "}
           Last Name
-          <input type="text" onChange={handleInput} />
+          <input name="lastName" type="text" onChange={handleInput} />
         </label>
         <label>
           {" "}
           Street Address
-          <input type="text" onChange={handleInput} />
+          <input name="street" type="text" onChange={handleInput} />
         </label>
         <label>
-          Street Address
-          <input type="text" onChange={handleInput} />
+          Street Address 2
+          <input name="street2" type="text" onChange={handleInput} />
         </label>
         <label>
           {" "}
           City
-          <input type="text" onChange={handleInput} />
+          <input name="city" type="text" onChange={handleInput} />
         </label>
         <label>
-          <select onChange={handleSelect}>
+          <select name="state" onChange={handleSelect}>
             {constants.STATE_LIST.map((state, index) => (
               <option key={index} value={state}>
                 {state}
@@ -68,19 +84,31 @@ const LibraryAccountForm = () => {
         </label>
         <label>
           Zip Code
-          <input type="text" onChange={handleInput} />
+          <input name="zipCode" type="text" onChange={handleInput} />
+        </label>
+        <label>
+          Birthdate
+          <input name="birthDate" type="text" onChange={handleInput} />
         </label>
         <label>
           Account Number
-          <input type="text" onChange={handleInput} />
+          <input
+            name="libraryAccountNumber"
+            type="text"
+            onChange={handleInput}
+          />
         </label>
         <label>
           Driver License Number
-          <input type="text" onChange={handleInput} />
+          <input
+            name="driverLicenseNumber"
+            type="text"
+            onChange={handleInput}
+          />
         </label>
         <label>
           County
-          <select onChange={handleSelect}>
+          <select name="county" onChange={handleSelect}>
             {constants.COUNTY_LIST.map((county, index) => (
               <option key={index} value={county}>
                 {county}
@@ -90,19 +118,19 @@ const LibraryAccountForm = () => {
         </label>
         <label>
           Telephone Number
-          <input type="text" onChange={handleInput} />
+          <input name="telephone" type="text" onChange={handleInput} />
         </label>
         <label>
           Email
-          <input type="text" onChange={handleInput} />
+          <input name="email" type="text" onChange={handleInput} />
         </label>
         <label>
           Handle
-          <input type="text" onChange={handleInput} />
+          <input name="handle" type="text" onChange={handleInput} />
         </label>
         <label>
           Account type
-          <select onChange={handleSelect}>
+          <select name="accountType" onChange={handleSelect}>
             {constants.ACCOUNT_TYPE.map((accountType, index) => (
               <option key={index} value={accountType}>
                 {accountType}
@@ -110,6 +138,7 @@ const LibraryAccountForm = () => {
             ))}
           </select>
         </label>
+        <button onClick={handleForm}>Submit</button>
       </form>
     </div>
   );
