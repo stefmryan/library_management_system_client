@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import constants from "../utilities/constants";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 
 const LibraryAccountForm = () => {
   const [accountObj, setAccountObj] = useState({
@@ -24,6 +25,7 @@ const LibraryAccountForm = () => {
     },
   });
 
+  const [confirmationModal, setConfirmationModal] = useState(false);
   //   const [label, setLabel] = useState({
   //     label: "",
   //   });
@@ -45,6 +47,7 @@ const LibraryAccountForm = () => {
 
   const handleForm = (e) => {
     e.preventDefault();
+    setConfirmationModal(true);
     console.log(accountObj);
   };
   return (
@@ -140,6 +143,7 @@ const LibraryAccountForm = () => {
         </label>
         <button onClick={handleForm}>Submit</button>
       </form>
+      {confirmationModal && <ConfirmationModal data={accountObj} />}
     </div>
   );
 };
