@@ -72,37 +72,42 @@ const LibraryAccountForm = () => {
         </label>
         <label>
           Account Number
-          <input type="text" />
+          <input type="text" onChange={handleInput} />
         </label>
         <label>
           Driver License Number
-          <input type="text" />
+          <input type="text" onChange={handleInput} />
         </label>
         <label>
           County
-          <select>
-            <option>Red</option>
-            <option>Orange</option>
+          <select onChange={handleSelect}>
+            {constants.COUNTY_LIST.map((county, index) => (
+              <option key={index} value={county}>
+                {county}
+              </option>
+            ))}
           </select>
         </label>
         <label>
           Telephone Number
-          <input type="text" />
+          <input type="text" onChange={handleInput} />
         </label>
         <label>
           Email
-          <input type="text" />
+          <input type="text" onChange={handleInput} />
         </label>
         <label>
           Handle
-          <input type="text" />
+          <input type="text" onChange={handleInput} />
         </label>
         <label>
           Account type
-          <select>
-            <option>Adult</option>
-            <option>Juvenile</option>
-            <option>Teacher</option>
+          <select onChange={handleSelect}>
+            {constants.ACCOUNT_TYPE.map((accountType, index) => (
+              <option key={index} value={accountType}>
+                {accountType}
+              </option>
+            ))}
           </select>
         </label>
       </form>
