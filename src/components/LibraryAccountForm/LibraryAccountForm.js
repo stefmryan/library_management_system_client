@@ -143,7 +143,9 @@ const LibraryAccountForm = () => {
         </label>
         <button onClick={handleForm}>Submit</button>
       </form>
-      {confirmationModal && <ConfirmationModal data={accountObj} />}
+      {confirmationModal && (
+        <ConfirmationModal data={accountObj} text={"Confirm Account?"} />
+      )}
     </div>
   );
 };
