@@ -62,6 +62,7 @@ const constants = {
   ],
   COUNTY_LIST: ["Red", "Green", "Orange"],
   ACCOUNT_TYPE: ["Adult", "Juvenile", "Teacher"],
+  CONFIRMATION_TEXT: "Confirm Account?",
 };
 
 export default constants;
