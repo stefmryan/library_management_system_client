@@ -63,6 +63,7 @@ const constants = {
   COUNTY_LIST: ["Red", "Green", "Orange"],
   ACCOUNT_TYPE: ["Adult", "Juvenile", "Teacher"],
   CONFIRMATION_TEXT: "Confirm Account?",
+  ADD_LIBRARY_ACCOUNT_ENDPOINT: "http://localhost:8080/register",
 };
 
 export default constants;
