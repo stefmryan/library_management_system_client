@@ -66,7 +66,7 @@ const LibraryAccountForm = () => {
               />
             </label>
           </div>
-          <div>
+          <div className={styles.column}>
             <label>
               Account type
               <select name="accountType" onChange={handleSelect}>
@@ -80,13 +80,13 @@ const LibraryAccountForm = () => {
           </div>
         </div>
         <div className={styles.row}>
-          <div>
+          <div className={styles.column}>
             <label>
               First Name
               <input name="firstName" type="text" onChange={handleInput} />
             </label>
           </div>
-          <div>
+          <div className={styles.column}>
             <label>
               {" "}
               Last Name
@@ -95,14 +95,14 @@ const LibraryAccountForm = () => {
           </div>
         </div>
         <div className={styles.row}>
-          <div>
+          <div className={styles.column}>
             <label>
               {" "}
               Street Address
               <input name="street" type="text" onChange={handleInput} />
             </label>
           </div>
-          <div>
+          <div className={styles.column}>
             <label>
               Street Address 2
               <input name="street2" type="text" onChange={handleInput} />
@@ -110,14 +110,14 @@ const LibraryAccountForm = () => {
           </div>
         </div>
         <div className={styles.row}>
-          <div>
+          <div className={styles.column}>
             <label>
               {" "}
               City
               <input name="city" type="text" onChange={handleInput} />
             </label>
           </div>
-          <div>
+          <div className={styles.column}>
             <label>
               State
               <select name="state" onChange={handleSelect}>
@@ -129,7 +129,7 @@ const LibraryAccountForm = () => {
               </select>
             </label>
           </div>
-          <div>
+          <div className={styles.column}>
             <label>
               Zip Code
               <input name="zipCode" type="text" onChange={handleInput} />
@@ -137,7 +137,7 @@ const LibraryAccountForm = () => {
           </div>
         </div>
         <div className={styles.row}>
-          <div>
+          <div className={styles.column}>
             <label>
               Driver License Number
               <input
@@ -147,7 +147,7 @@ const LibraryAccountForm = () => {
               />
             </label>
           </div>
-          <div>
+          <div className={styles.column}>
             <label>
               Birthdate
               <input name="birthDate" type="text" onChange={handleInput} />
@@ -155,13 +155,13 @@ const LibraryAccountForm = () => {
           </div>
         </div>
         <div className={styles.row}>
-          <div>
+          <div className={styles.column}>
             <label>
               Email
               <input name="email" type="text" onChange={handleInput} />
             </label>
           </div>
-          <div>
+          <div className={styles.column}>
             <label>
               Telephone Number
               <input name="telephone" type="text" onChange={handleInput} />
@@ -169,7 +169,7 @@ const LibraryAccountForm = () => {
           </div>
         </div>
         <div className={styles.row}>
-          <div>
+          <div className={styles.column}>
             <label>
               County
               <select name="county" onChange={handleSelect}>
@@ -181,7 +181,7 @@ const LibraryAccountForm = () => {
               </select>
             </label>
           </div>
-          <div>
+          <div className={styles.column}>
             <label>
               Handle
               <input name="handle" type="text" onChange={handleInput} />

@@ -1,5 +1,23 @@
 button {
   width: 100%;
+  background-color: slategrey;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[type="text"],
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  cursor: text;
 }
 
 .container {
@@ -7,16 +25,23 @@ button {
   margin-right: auto;
   margin-left: auto;
   margin-top: 2em;
-  background-color: aqua;
+  margin-bottom: 2em;
+  background-color: whitesmoke;
   padding: 1.5em;
 }
+
+.column {
+  margin-left: 10px;
+}
+
 .column label {
-  display: block;
+  display: flex;
+  flex-direction: column;
   text-align: left;
 }
 
 .row {
-  /* display: flex; */
+  display: flex;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
 }
