@@ -1,0 +1,22 @@
+button {
+  width: 100%;
+}
+
+.container {
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 2em;
+  background-color: aqua;
+  padding: 1.5em;
+}
+.column label {
+  display: block;
+  text-align: left;
+}
+
+.row {
+  /* display: flex; */
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
