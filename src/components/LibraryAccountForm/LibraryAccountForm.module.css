@@ -8,6 +8,7 @@ button {
   border-radius: 4px;
   cursor: pointer;
 }
+
 input[type="text"],
 select {
   width: 100%;
@@ -28,6 +29,7 @@ select {
   margin-bottom: 2em;
   background-color: whitesmoke;
   padding: 1.5em;
+  border-radius: 12px;
 }
 
 .column {
