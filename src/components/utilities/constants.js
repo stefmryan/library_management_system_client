@@ -60,8 +60,16 @@ const constants = {
     "WI",
     "WY",
   ],
-  COUNTY_LIST: ["Red", "Green", "Orange"],
-  ACCOUNT_TYPE: ["Adult", "Juvenile", "Teacher"],
+  COUNTY_LIST: [
+    { id: 1, label: "Red" },
+    { id: 2, label: "Green" },
+    { id: 3, label: "Orange" },
+  ],
+  ACCOUNT_TYPE: [
+    { id: 2, label: "Adult" },
+    { id: 1, label: "Juvenile" },
+    { id: 3, label: "Teacher" },
+  ],
   CONFIRMATION_TEXT: "Confirm Account?",
   ADD_LIBRARY_ACCOUNT_ENDPOINT: "http://localhost:8080/register",
 };

@@ -19,9 +19,11 @@ const LibraryAccountForm = () => {
     state: "",
     zipCode: "",
     county: {
+      id: "",
       label: "",
     },
     accountType: {
+      id: "",
       label: "",
     },
   });
@@ -43,8 +45,21 @@ const LibraryAccountForm = () => {
 
   const handleSelect = (e) => {
     const name = e.target.name;
-    const value = e.target.value;
-    setAccountObj({ ...accountObj, [name]: { label: value } });
+    let value = e.target.value;
+
+    if (name === "county") {
+      value = constants.COUNTY_LIST.filter((item) => item.id === Number(value));
+      value = value[0];
+    }
+    if (name === "accountType") {
+      value = constants.ACCOUNT_TYPE.filter(
+        (item) => item.id === Number(value)
+      );
+      value = value[0];
+    }
+
+    console.log(value);
+    setAccountObj({ ...accountObj, [name]: value });
   };
 
   const handleForm = (e) => {
@@ -61,7 +76,7 @@ const LibraryAccountForm = () => {
               Account Number
               <input
                 name="libraryAccountNumber"
-                type="text"
+                type="number"
                 onChange={handleInput}
               />
             </label>
@@ -71,8 +86,8 @@ const LibraryAccountForm = () => {
               Account type
               <select name="accountType" onChange={handleSelect}>
                 {constants.ACCOUNT_TYPE.map((accountType, index) => (
-                  <option key={index} value={accountType}>
-                    {accountType}
+                  <option key={index} value={accountType.id}>
+                    {accountType.label}
                   </option>
                 ))}
               </select>
@@ -150,7 +165,7 @@ const LibraryAccountForm = () => {
           <div className={styles.column}>
             <label>
               Birthdate
-              <input name="birthDate" type="text" onChange={handleInput} />
+              <input name="birthdate" type="text" onChange={handleInput} />
             </label>
           </div>
         </div>
@@ -174,8 +189,8 @@ const LibraryAccountForm = () => {
               County
               <select name="county" onChange={handleSelect}>
                 {constants.COUNTY_LIST.map((county, index) => (
-                  <option key={index} value={county}>
-                    {county}
+                  <option key={index} value={county.id}>
+                    {county.label}
                   </option>
                 ))}
               </select>
