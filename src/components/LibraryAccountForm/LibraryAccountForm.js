@@ -26,9 +26,9 @@ const LibraryAccountForm = () => {
     },
   });
 
-  //const message = constants.CONFIRMATION_TEXT;
-
   const [confirmationModal, setConfirmationModal] = useState(false);
+
+  //const message = constants.CONFIRMATION_TEXT;
 
   const closeModal = (boolean) => {
     setConfirmationModal(boolean);
@@ -192,9 +192,8 @@ const LibraryAccountForm = () => {
           <button onClick={handleForm}>Submit</button>
         </div>
       </div>
-
       {confirmationModal && (
-        <ConfirmationModal data={accountObj} closeModal={() => closeModal()} />
+        <ConfirmationModal data={accountObj} closeModal={closeModal} />
       )}
     </div>
   );
