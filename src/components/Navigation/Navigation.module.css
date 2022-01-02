@@ -18,3 +18,9 @@
   display: block;
   cursor: pointer;
 }
+
+.logout {
+  position: absolute;
+  left: 0;
+  bottom: 10%;
+}
