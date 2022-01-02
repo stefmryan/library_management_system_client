@@ -12,15 +12,25 @@
 
 .container div {
   padding: 6px 8px 6px 16px;
-  text-decoration: none;
   font-size: 25px;
-  color: white;
   display: block;
   cursor: pointer;
 }
 
+.container div:hover {
+  background-color: forestgreen;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+}
+
 .logout {
+  color: white;
+  text-decoration: none;
   position: absolute;
   left: 0;
   bottom: 10%;
+  width: 100%;
 }
