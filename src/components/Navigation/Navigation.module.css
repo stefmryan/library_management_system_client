@@ -1,11 +1,20 @@
 .container {
   height: 100%;
-  width: 160px;
-  position: fixed;
-  z-index: 1;
+  width: 17%;
+  position: fixed; /* Fixed Sidebar (stay in place on scroll and position relative to viewport) */
+  z-index: 1; /* Stay on top of everything */
   top: 0;
   left: 0;
   background-color: darkolivegreen;
-  overflow-x: hidden;
+  overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 20px;
+}
+
+.container div {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+  cursor: pointer;
 }
