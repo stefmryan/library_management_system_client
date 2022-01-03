@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AccountComponent from "../../AccountComponent/AccountComponent";
+import BookTable from "../../BookTable/BookTable";
 import styles from "../CheckOutComponent/CheckOutComponent.module.css";
 
 const CheckOutComponent = () => {
@@ -28,6 +29,7 @@ const CheckOutComponent = () => {
   // });
 
   const [showAccount, setShowAccount] = useState(false);
+  const [showBookTable, setShowBookTable] = useState(false);
 
   const handleLibraryAccount = (e) => {
     const value = e.target.value;
@@ -37,19 +39,45 @@ const CheckOutComponent = () => {
     }
   };
 
+  const handleCheckOut = (e) => {
+    if (e.key === "Enter") {
+      setShowBookTable(true);
+    }
+  };
+
+  const handleClear = () => {
+    //grab inputs and clear data
+    const libraryAccount = document.getElementsByName("library-account");
+    libraryAccount[0].value = "";
+    const item = document.getElementsByName("item");
+    item[0].value = "";
+
+    //need to clear booktable
+    setShowBookTable(false);
+
+    //need to clear account
+    setShowAccount(false);
+  };
+
   return (
     <div>
       <div>{showAccount && <AccountComponent />}</div>
-      <div className={styles.container}>
+      <form id="checkOut" className={styles.container}>
         <label>
           Library Account
-          <input type="number" onKeyDown={handleLibraryAccount} max={999999} />
+          <input
+            name="library-account"
+            type="number"
+            onKeyDown={handleLibraryAccount}
+          />
         </label>
         <label>
           Item
-          <input />
+          <input name="item" type="number" onKeyDown={handleCheckOut} />
         </label>
-      </div>
+        <button onClick={handleClear}>Clear</button>
+      </form>
+      <div>{showBookTable && <BookTable />}</div>
     </div>
   );
 };
