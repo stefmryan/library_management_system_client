@@ -34,7 +34,6 @@ const CheckOutComponent = () => {
   const handleLibraryAccount = (e) => {
     const value = e.target.value;
     if (e.key === "Enter" && value.length === 6) {
-      console.log(value);
       setShowAccount(true);
     }
   };
@@ -62,7 +61,7 @@ const CheckOutComponent = () => {
   return (
     <div>
       <div>{showAccount && <AccountComponent />}</div>
-      <form id="checkOut" className={styles.container}>
+      <div id="checkOut" className={styles.container}>
         <label>
           Library Account
           <input
@@ -76,7 +75,8 @@ const CheckOutComponent = () => {
           <input name="item" type="number" onKeyDown={handleCheckOut} />
         </label>
         <button onClick={handleClear}>Clear</button>
-      </form>
+      </div>
+
       <div>{showBookTable && <BookTable />}</div>
     </div>
   );
