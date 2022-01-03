@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import LandingPage from "./components/pages/LandingPage/LandingPage";
-import LibraryAccountForm from "./components/LibraryAccountForm/LibraryAccountForm";
+import LandingPage from "../src/components/pages/LandingPage/LandingPage";
+import LibraryAccountForm from "../src/components/pages/LibraryAccountForm/LibraryAccountForm";
 import Navigation from "./components/Navigation/Navigation";
 import styles from "./App.module.css";
-import CheckInComponent from "./components/CheckInComponent/CheckInComponent";
-import CheckOutComponent from "./components/CheckOutComponent/CheckOutComponent";
-import FindAnItemComponent from "./components/FindAnItemComponent/FindAnItemComponent";
+import CheckInComponent from "../src/components/pages/CheckInComponent/CheckInComponent";
+import CheckOutComponent from "../src/components/pages/CheckOutComponent/CheckOutComponent";
+import FindAnItemComponent from "../src/components/pages/FindAnItemComponent/FindAnItemComponent";
 
 function App() {
   return (

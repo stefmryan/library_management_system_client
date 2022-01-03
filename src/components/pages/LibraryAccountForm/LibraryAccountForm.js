@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import constants from "../utilities/constants";
-import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
+import constants from "../../utilities/constants";
+import ConfirmationModal from "../../ConfirmationModal/ConfirmationModal";
 import styles from "../LibraryAccountForm/LibraryAccountForm.module.css";
 
 const LibraryAccountForm = () => {

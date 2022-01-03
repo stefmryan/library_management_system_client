@@ -26,6 +26,13 @@
   text-decoration: none;
 }
 
+.logo {
+  /* position: relative; */
+}
+.logo img {
+  width: 50%;
+}
+
 .logout {
   color: white;
   text-decoration: none;

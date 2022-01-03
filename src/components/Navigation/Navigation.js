@@ -1,10 +1,16 @@
 import React from "react";
 import styles from "../Navigation/Navigation.module.css";
 import { Link } from "react-router-dom";
+import LibraryLogo from "../utilities/Images/LibraryLogo.svg";
 
 const Navigation = () => {
   return (
     <div className={styles.container}>
+      <div className={styles.logo}>
+        <Link to="/">
+          <img src={LibraryLogo} />
+        </Link>
+      </div>
       <div>
         <Link to="/checkout" className={styles.link}>
           Checkout
