@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import AccountComponent from "../../AccountComponent/AccountComponent";
 import styles from "../CheckOutComponent/CheckOutComponent.module.css";
 
 const CheckOutComponent = () => {
@@ -26,22 +27,29 @@ const CheckOutComponent = () => {
   //   },
   // });
 
+  const [showAccount, setShowAccount] = useState(false);
+
   const handleLibraryAccount = (e) => {
-    if (e.key === "Enter") {
-      console.log(e.target.value);
+    const value = e.target.value;
+    if (e.key === "Enter" && value.length === 6) {
+      console.log(value);
+      setShowAccount(true);
     }
   };
 
   return (
-    <div className={styles.container}>
-      <label>
-        Library Account
-        <input type="number" onKeyDown={handleLibraryAccount} />
-      </label>
-      <label>
-        Item
-        <input />
-      </label>
+    <div>
+      <div>{showAccount && <AccountComponent />}</div>
+      <div className={styles.container}>
+        <label>
+          Library Account
+          <input type="number" onKeyDown={handleLibraryAccount} max={999999} />
+        </label>
+        <label>
+          Item
+          <input />
+        </label>
+      </div>
     </div>
   );
 };
