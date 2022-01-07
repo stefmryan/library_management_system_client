@@ -62,14 +62,19 @@ const CheckOutComponent = () => {
     <div>
       <div>{showAccount && <AccountComponent />}</div>
       <div id="checkOut" className={styles.container}>
-        <label>
-          Library Account
-          <input
-            name="library-account"
-            type="number"
-            onKeyDown={handleLibraryAccount}
-          />
-        </label>
+        <div className={styles.input_div}>
+          <label>
+            Library Account Number
+            <input
+              name="library-account"
+              type="number"
+              onKeyDown={handleLibraryAccount}
+            />
+          </label>
+          {/* <button type="button" onClick={handleLibraryAccount}>
+            Click Me
+          </button> */}
+        </div>
         <label>
           Item
           <input name="item" type="number" onKeyDown={handleCheckOut} />
