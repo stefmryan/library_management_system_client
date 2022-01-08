@@ -1,89 +1,99 @@
-import React from "react";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from "react";
 import styles from "../AccountComponent/AccountComponent.module.css";
 
 const AccountComponent = () => {
+  const [edit, setEdit] = useState(true);
+
   return (
-    <div>
-      <form className={styles.gridcontainer}>
+    <div className={styles.container}>
+      <FontAwesomeIcon
+        icon={faEdit}
+        className={styles.icon}
+        onClick={() => setEdit(!edit)}
+      />
+      <div className={styles.gridcontainer}>
         <div>
           <label>
             First Name
-            <input />
+            <input disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             Last Name
-            <input />
+            <input disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             Barcode
-            <input />
+            <input disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             Email
-            <input />
+            <input disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             Telephone
-            <input />
+            <input disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             Library Account Type
-            <input />
+            <input disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             Street Address
-            <input />
+            <input disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             Street Address 2
-            <input />
+            <input disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             City
-            <input />
+            <input disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             State
-            <input />
+            <input disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             Zip Code
-            <input />
+            <input disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             ID Number
-            <input />
+            <input disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             Birth Date
-            <input />
+            <input disabled={edit} />
           </label>
         </div>
-      </form>
+        {!edit && <button type="button" />}
+      </div>
     </div>
   );
 };
