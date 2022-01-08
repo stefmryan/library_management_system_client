@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import AccountComponent from "../../AccountComponent/AccountComponent";
 import BookTable from "../../BookTable/BookTable";
 import styles from "../CheckOutComponent/CheckOutComponent.module.css";
+// import constants from "../../utilities/constants";
 
 const CheckOutComponent = () => {
+  const [libraryAccount, setLibraryAccount] = useState(0);
   // const [accountObj, setAccountObj] = useState({
   //   libraryAccountNumber: 0,
   //   email: "",
@@ -31,10 +33,27 @@ const CheckOutComponent = () => {
   const [showAccount, setShowAccount] = useState(false);
   const [showBookTable, setShowBookTable] = useState(false);
 
-  const handleLibraryAccount = (e) => {
+  const handleLibraryAccount = async (e) => {
     const value = e.target.value;
-    if (e.key === "Enter" && value.length === 6) {
+    setLibraryAccount(value);
+    if (e.key === "Enter" && libraryAccount.length === 6) {
+      console.log(libraryAccount);
       setShowAccount(true);
+      await fetch(`http://localhost:8080/library-accounts/${libraryAccount}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (response.ok) {
+            console.log(response);
+            //comeback to this and refactor--take out false
+          } else {
+            console.log("Something went wrong");
+          }
+        })
+        .catch((error) => console.log("Something went wrong", error));
     }
   };
 
