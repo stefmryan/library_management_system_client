@@ -30,19 +30,33 @@ const CheckOutComponent = () => {
     },
   });
 
+  const [checkedOutItem, setCheckedOutItem] = useState({
+    id: 0,
+    barcode: 0,
+    title: "",
+    author: "",
+    dueDate: "",
+    available: "",
+  });
+
   const [showAccount, setShowAccount] = useState(false);
   const [showBookTable, setShowBookTable] = useState(false);
+  const [showButton, setShowButton] = useState(true);
+  const [itemBarcode, setItemBarcode] = useState("");
 
+  /**
+   * sets the value of library account
+   * @param {KeyboardEvent} e
+   */
   const addLibraryAccount = (e) => {
     const value = e.target.value;
     setLibraryAccount(value);
   };
 
+  /**
+   * fetches library account from backend and sets the library account with values retrieved.
+   */
   const handleLibraryAccount = async () => {
-    // const value = e.target.value;
-    // setLibraryAccount(Number(value));
-
-    setShowAccount(true);
     await fetch(`http://localhost:8080/library-accounts/${libraryAccount}`, {
       method: "GET",
       headers: {
@@ -51,31 +65,55 @@ const CheckOutComponent = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setAccountObj({ ...data });
+        setShowAccount(true);
+        setShowButton(false);
       })
       .catch((error) => console.log("Something went wrong", error));
   };
 
-  const handleCheckOut = (e) => {
-    if (e.key === "Enter") {
+  const setItemToBeCheckedOut = (e) => {
+    const value = e.target.value;
+    setItemBarcode(value);
+  };
+
+  const handleCheckOut = async () => {
+    console.log(checkedOutItem);
+
+    await fetch(
+      `http://localhost:8080/checkout/${libraryAccount}/${itemBarcode}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setCheckedOutItem({ data });
+        // setShowAccount(true);
+        // setShowButton(false);
+      })
+      .catch((error) => console.log("Something went wrong", error));
+    if (!showBookTable) {
       setShowBookTable(true);
     }
   };
 
-  const handleClear = () => {
-    //grab inputs and clear data
-    const libraryAccount = document.getElementsByName("library-account");
-    libraryAccount[0].value = "";
-    const item = document.getElementsByName("item");
-    item[0].value = "";
+  // const handleClear = () => {
+  //   //grab inputs and clear data
+  //   const libraryAccount = document.getElementsByName("library-account");
+  //   libraryAccount[0].value = "";
+  //   const item = document.getElementsByName("item");
+  //   item[0].value = "";
 
-    //need to clear booktable
-    setShowBookTable(false);
+  //   //need to clear booktable
+  //   setShowBookTable(false);
 
-    //need to clear account
-    setShowAccount(false);
-  };
+  //   //need to clear account
+  //   setShowAccount(false);
+  // };
 
   return (
     <div>
@@ -90,19 +128,29 @@ const CheckOutComponent = () => {
               onChange={addLibraryAccount}
             />
           </label>
-          <button type="button" onClick={handleLibraryAccount}>
-            Click Me
-          </button>
+          {showButton && (
+            <button type="button" onClick={handleLibraryAccount}>
+              Click Me
+            </button>
+          )}
         </div>
-        <label>
-          Item
-          <input name="item" type="number" onKeyDown={handleCheckOut} />
-        </label>
+        {!showButton && (
+          <div>
+            <label>
+              Item
+              <input
+                name="item"
+                type="number"
+                onChange={setItemToBeCheckedOut}
+              />
+            </label>
 
-        <button onClick={handleClear}>Check Out Item</button>
+            <button onClick={handleCheckOut}>Check Out Item</button>
+          </div>
+        )}
       </div>
 
-      <div>{showBookTable && <BookTable />}</div>
+      <div>{showBookTable && <BookTable item={checkedOutItem} />}</div>
     </div>
   );
 };

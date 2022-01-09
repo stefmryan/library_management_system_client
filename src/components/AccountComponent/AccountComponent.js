@@ -6,6 +6,10 @@ import styles from "../AccountComponent/AccountComponent.module.css";
 const AccountComponent = ({ data }) => {
   const [edit, setEdit] = useState(true);
 
+  const updateLibraryAccount = () => {
+    console.log(data);
+  };
+
   return (
     <div className={styles.container}>
       <FontAwesomeIcon
@@ -92,7 +96,7 @@ const AccountComponent = ({ data }) => {
             <input defaultValue={data.birthDate} disabled={edit} />
           </label>
         </div>
-        {!edit && <button type="button" />}
+        {!edit && <button type="button" onClick={updateLibraryAccount} />}
       </div>
     </div>
   );
