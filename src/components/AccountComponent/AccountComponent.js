@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import styles from "../AccountComponent/AccountComponent.module.css";
 
-const AccountComponent = () => {
+const AccountComponent = ({ data }) => {
   const [edit, setEdit] = useState(true);
 
   return (
@@ -17,31 +17,31 @@ const AccountComponent = () => {
         <div>
           <label>
             First Name
-            <input disabled={edit} />
+            <input defaultValue={data.firstName} disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             Last Name
-            <input disabled={edit} />
+            <input defaultValue={data.lastName} disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             Barcode
-            <input disabled={edit} />
+            <input defaultValue={data.libraryAccountNumber} disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             Email
-            <input disabled={edit} />
+            <input defaultValue={data.email} disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             Telephone
-            <input disabled={edit} />
+            <input defaultValue={data.telephone} disabled={edit} />
           </label>
         </div>
         <div>
@@ -53,19 +53,19 @@ const AccountComponent = () => {
         <div>
           <label>
             Street Address
-            <input disabled={edit} />
+            <input defaultValue={data.street} disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             Street Address 2
-            <input disabled={edit} />
+            <input defaultValue={data.street2} disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             City
-            <input disabled={edit} />
+            <input defaultValue={data.city} disabled={edit} />
           </label>
         </div>
         <div>
@@ -77,19 +77,19 @@ const AccountComponent = () => {
         <div>
           <label>
             Zip Code
-            <input disabled={edit} />
+            <input defaultValue={data.zipCode} disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             ID Number
-            <input disabled={edit} />
+            <input defaultValue={data.driverLicenseNumber} disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             Birth Date
-            <input disabled={edit} />
+            <input defaultValue={data.birthDate} disabled={edit} />
           </label>
         </div>
         {!edit && <button type="button" />}
