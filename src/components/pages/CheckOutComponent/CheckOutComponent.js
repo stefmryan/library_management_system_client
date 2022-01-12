@@ -78,17 +78,13 @@ const CheckOutComponent = () => {
   };
 
   const handleCheckOut = async () => {
-    console.log(checkedOutItem);
-
-    await fetch(
-      `http://localhost:8080/checkout/${libraryAccount}/${itemBarcode}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    await fetch(`http://localhost:8080/checkout/${itemBarcode}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(accountObj),
+    })
       .then((response) => response.json())
       .then((data) => {
         setCheckedOutItem({ data });
