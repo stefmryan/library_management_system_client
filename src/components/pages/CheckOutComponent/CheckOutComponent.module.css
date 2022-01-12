@@ -9,6 +9,10 @@
   border-radius: 12px;
 }
 
+.table_container {
+  background-color: whitesmoke;
+}
+
 /* .input_div {
   display: flex;
   flex-direction: row;

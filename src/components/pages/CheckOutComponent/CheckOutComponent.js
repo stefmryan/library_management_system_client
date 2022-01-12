@@ -30,14 +30,7 @@ const CheckOutComponent = () => {
     },
   });
 
-  const [checkedOutItem, setCheckedOutItem] = useState({
-    id: 0,
-    barcode: 0,
-    title: "",
-    author: "",
-    dueDate: "",
-    available: "",
-  });
+  const [checkedOutItem, setCheckedOutItem] = useState([]);
 
   const [showAccount, setShowAccount] = useState(false);
   const [showBookTable, setShowBookTable] = useState(false);
@@ -87,7 +80,7 @@ const CheckOutComponent = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setCheckedOutItem({ data });
+        setCheckedOutItem([...checkedOutItem, data]);
         // setShowAccount(true);
         // setShowButton(false);
       })
@@ -145,8 +138,21 @@ const CheckOutComponent = () => {
           </div>
         )}
       </div>
-
-      <div>{showBookTable && <BookTable item={checkedOutItem} />}</div>
+      {showBookTable && (
+        <div className={styles.table_container}>
+          <table>
+            <thead>
+              <tr>
+                <th>Barcode</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Due Date</th>
+              </tr>
+              <BookTable items={checkedOutItem} />
+            </thead>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
