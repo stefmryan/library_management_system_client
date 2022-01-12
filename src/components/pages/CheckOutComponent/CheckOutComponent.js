@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import AccountComponent from "../../AccountComponent/AccountComponent";
 import BookTable from "../../BookTable/BookTable";
 import styles from "../CheckOutComponent/CheckOutComponent.module.css";
@@ -36,6 +36,7 @@ const CheckOutComponent = () => {
   const [showBookTable, setShowBookTable] = useState(false);
   const [showButton, setShowButton] = useState(true);
   const [itemBarcode, setItemBarcode] = useState("");
+  const itemRef = useRef();
 
   /**
    * sets the value of library account
@@ -81,6 +82,7 @@ const CheckOutComponent = () => {
       .then((response) => response.json())
       .then((data) => {
         setCheckedOutItem([...checkedOutItem, data]);
+        itemRef.current.value = "";
         // setShowAccount(true);
         // setShowButton(false);
       })
@@ -119,7 +121,7 @@ const CheckOutComponent = () => {
           </label>
           {showButton && (
             <button type="button" onClick={handleLibraryAccount}>
-              Click Me
+              Library Account
             </button>
           )}
         </div>
@@ -129,7 +131,8 @@ const CheckOutComponent = () => {
               Item
               <input
                 name="item"
-                type="number"
+                type="text"
+                ref={itemRef}
                 onChange={setItemToBeCheckedOut}
               />
             </label>
