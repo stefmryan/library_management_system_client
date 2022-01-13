@@ -13,6 +13,10 @@
   background-color: whitesmoke;
 }
 
+.btn {
+  width: 25%;
+  float: right;
+}
 /* .input_div {
   display: flex;
   flex-direction: row;

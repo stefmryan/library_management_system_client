@@ -1,42 +1,19 @@
 import React, { useRef, useState } from "react";
 import AccountComponent from "../../AccountComponent/AccountComponent";
 import BookTable from "../../BookTable/BookTable";
+import constants from "../../utilities/constants";
 import styles from "../CheckOutComponent/CheckOutComponent.module.css";
-// import constants from "../../utilities/constants";
 
 const CheckOutComponent = () => {
   const [libraryAccount, setLibraryAccount] = useState("");
-  const [accountObj, setAccountObj] = useState({
-    libraryAccountNumber: 0,
-    email: "",
-    handle: "",
-    firstName: "",
-    lastName: "",
-    driverLicenseNumber: "",
-    birthdate: "",
-    telephone: "",
-    street: "",
-    street2: "",
-    city: "",
-    state: "",
-    zipCode: "",
-    county: {
-      id: "",
-      label: "",
-    },
-    accountType: {
-      id: "",
-      label: "",
-    },
-  });
-
+  const [accountObj, setAccountObj] = useState(constants.LIBRARY_ACCOUNT_OBJ);
   const [checkedOutItem, setCheckedOutItem] = useState([]);
-
   const [showAccount, setShowAccount] = useState(false);
   const [showBookTable, setShowBookTable] = useState(false);
   const [showButton, setShowButton] = useState(true);
   const [itemBarcode, setItemBarcode] = useState("");
   const itemRef = useRef();
+  const accountRef = useRef();
 
   /**
    * sets the value of library account
@@ -66,11 +43,19 @@ const CheckOutComponent = () => {
       .catch((error) => console.log("Something went wrong", error));
   };
 
+  /**
+   * sets itembarcode from item input
+   * @param {keyboardInput} e
+   */
   const setItemToBeCheckedOut = (e) => {
     const value = e.target.value;
     setItemBarcode(value);
   };
 
+  /**
+   * Does a fetch call to checkout an item.  Clears checkout input and displays book
+   * table.
+   */
   const handleCheckOut = async () => {
     await fetch(`http://localhost:8080/checkout/${itemBarcode}`, {
       method: "PUT",
@@ -83,8 +68,6 @@ const CheckOutComponent = () => {
       .then((data) => {
         setCheckedOutItem([...checkedOutItem, data]);
         itemRef.current.value = "";
-        // setShowAccount(true);
-        // setShowButton(false);
       })
       .catch((error) => console.log("Something went wrong", error));
     if (!showBookTable) {
@@ -92,23 +75,25 @@ const CheckOutComponent = () => {
     }
   };
 
-  // const handleClear = () => {
-  //   //grab inputs and clear data
-  //   const libraryAccount = document.getElementsByName("library-account");
-  //   libraryAccount[0].value = "";
-  //   const item = document.getElementsByName("item");
-  //   item[0].value = "";
+  /**
+   * Clears inputs and resets displays for book table and library account info
+   */
+  const handleClear = () => {
+    //resetting accountObj and checkoutitem array and clearing
+    //library account input
+    setAccountObj(constants.LIBRARY_ACCOUNT_OBJ);
+    accountRef.current.value = "";
+    setCheckedOutItem([]);
 
-  //   //need to clear booktable
-  //   setShowBookTable(false);
-
-  //   //need to clear account
-  //   setShowAccount(false);
-  // };
+    //resetting showing book table and certain buttons
+    // and closing account inputs.
+    setShowBookTable(false);
+    setShowButton(true);
+    setShowAccount(false);
+  };
 
   return (
     <div>
-      <div>{showAccount && <AccountComponent data={accountObj} />}</div>
       <div id="checkOut" className={styles.container}>
         <div className={styles.input_div}>
           <label>
@@ -116,6 +101,7 @@ const CheckOutComponent = () => {
             <input
               name="library-account"
               type="number"
+              ref={accountRef}
               onChange={addLibraryAccount}
             />
           </label>
@@ -140,21 +126,27 @@ const CheckOutComponent = () => {
             <button onClick={handleCheckOut}>Check Out Item</button>
           </div>
         )}
+        <div>{showAccount && <AccountComponent data={accountObj} />}</div>
+        {showBookTable && (
+          <div className={styles.table_container}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Barcode</th>
+                  <th>Title</th>
+                  <th>Author</th>
+                  <th>Due Date</th>
+                </tr>
+                <BookTable items={checkedOutItem} />
+              </thead>
+            </table>
+          </div>
+        )}
       </div>
-      {showBookTable && (
-        <div className={styles.table_container}>
-          <table>
-            <thead>
-              <tr>
-                <th>Barcode</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Due Date</th>
-              </tr>
-              <BookTable items={checkedOutItem} />
-            </thead>
-          </table>
-        </div>
+      {!showButton && (
+        <button onClick={handleClear} className={styles.btn}>
+          Clear Account
+        </button>
       )}
     </div>
   );
