@@ -15,13 +15,18 @@ const AccountComponent = ({ data }) => {
       <FontAwesomeIcon
         icon={faEdit}
         className={styles.icon}
+        data-testid="edit-icon"
         onClick={() => setEdit(!edit)}
       />
       <div className={styles.gridcontainer}>
         <div>
           <label>
             First Name
-            <input defaultValue={data.firstName} disabled={edit} />
+            <input
+              data-testid="firstName"
+              defaultValue={data.firstName}
+              disabled={edit}
+            />
           </label>
         </div>
         <div>
