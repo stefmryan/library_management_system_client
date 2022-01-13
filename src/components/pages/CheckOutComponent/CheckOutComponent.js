@@ -136,6 +136,7 @@ const CheckOutComponent = () => {
                   <th>Title</th>
                   <th>Author</th>
                   <th>Due Date</th>
+                  <th>Renew Item</th>
                 </tr>
                 <BookTable items={checkedOutItem} />
               </thead>

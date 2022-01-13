@@ -12,6 +12,9 @@ const BookTable = ({ items }) => {
       <td>{item.title}</td>
       <td>{item.author}</td>
       <td>{item.dueDate}</td>
+      <td>
+        <button type="button">Renew Item</button>
+      </td>
     </tr>
   ));
 };
