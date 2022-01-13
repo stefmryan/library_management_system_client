@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import AccountComponent from "../../AccountComponent/AccountComponent";
 import BookTable from "../../BookTable/BookTable";
 import constants from "../../utilities/constants";
@@ -42,6 +42,13 @@ const CheckOutComponent = () => {
       })
       .catch((error) => console.log("Something went wrong", error));
   };
+
+  useEffect(() => {
+    if (showAccount && accountObj.books.length > 0) {
+      setCheckedOutItem([...accountObj.books]);
+      setShowBookTable(true);
+    }
+  }, [showAccount]);
 
   /**
    * sets itembarcode from item input
