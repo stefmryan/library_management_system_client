@@ -32,25 +32,47 @@ const AccountComponent = ({ data }) => {
         <div>
           <label>
             Last Name
-            <input defaultValue={data.lastName} disabled={edit} />
+            <input
+              data-testid="lastName"
+              defaultValue={data.lastName}
+              disabled={edit}
+            />
           </label>
         </div>
         <div>
           <label>
             Barcode
-            <input defaultValue={data.libraryAccountNumber} disabled={edit} />
+            <input
+              data-testid="barcode"
+              defaultValue={data.libraryAccountNumber}
+              disabled={edit}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            County
+            <input defaultValue={data.county} disabled={edit} />
           </label>
         </div>
         <div>
           <label>
             Email
-            <input defaultValue={data.email} disabled={edit} />
+            <input
+              data-testid="email"
+              defaultValue={data.email}
+              disabled={edit}
+            />
           </label>
         </div>
         <div>
           <label>
             Telephone
-            <input defaultValue={data.telephone} disabled={edit} />
+            <input
+              data-testid="telephone"
+              defaultValue={data.telephone}
+              disabled={edit}
+            />
           </label>
         </div>
         <div>
@@ -62,19 +84,31 @@ const AccountComponent = ({ data }) => {
         <div>
           <label>
             Street Address
-            <input defaultValue={data.street} disabled={edit} />
+            <input
+              data-testid="street1"
+              defaultValue={data.street}
+              disabled={edit}
+            />
           </label>
         </div>
         <div>
           <label>
             Street Address 2
-            <input defaultValue={data.street2} disabled={edit} />
+            <input
+              data-testid="street2"
+              defaultValue={data.street2}
+              disabled={edit}
+            />
           </label>
         </div>
         <div>
           <label>
             City
-            <input defaultValue={data.city} disabled={edit} />
+            <input
+              data-testid="city"
+              defaultValue={data.city}
+              disabled={edit}
+            />
           </label>
         </div>
         <div>
@@ -86,22 +120,40 @@ const AccountComponent = ({ data }) => {
         <div>
           <label>
             Zip Code
-            <input defaultValue={data.zipCode} disabled={edit} />
+            <input
+              data-testid="zipCode"
+              defaultValue={data.zipCode}
+              disabled={edit}
+            />
           </label>
         </div>
         <div>
           <label>
             ID Number
-            <input defaultValue={data.driverLicenseNumber} disabled={edit} />
+            <input
+              data-testid="idNumber"
+              defaultValue={data.driverLicenseNumber}
+              disabled={edit}
+            />
           </label>
         </div>
         <div>
           <label>
             Birth Date
-            <input defaultValue={data.birthDate} disabled={edit} />
+            <input
+              data-testid="birthDate"
+              defaultValue={data.birthDate}
+              disabled={edit}
+            />
           </label>
         </div>
-        {!edit && <button type="button" onClick={updateLibraryAccount} />}
+        {!edit && (
+          <button
+            data-testid="update-btn"
+            type="button"
+            onClick={updateLibraryAccount}
+          />
+        )}
       </div>
     </div>
   );
