@@ -1,13 +1,54 @@
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { /*useEffect,*/ useState } from "react";
 import styles from "../AccountComponent/AccountComponent.module.css";
+import constants from "../utilities/constants";
 
 const AccountComponent = ({ data }) => {
   const [edit, setEdit] = useState(true);
+  const [accountObj, setAccountObj] = useState({ ...data });
 
-  const updateLibraryAccount = () => {
-    console.log(data);
+  const handleInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setAccountObj({ ...accountObj, [name]: value });
+  };
+
+  const handleSelect = (e) => {
+    const name = e.target.name;
+    let value = e.target.value;
+
+    if (name === "county") {
+      value = constants.COUNTY_LIST.filter((item) => item.id === Number(value));
+      value = value[0];
+    }
+    if (name === "accountType") {
+      value = constants.ACCOUNT_TYPE.filter(
+        (item) => item.id === Number(value)
+      );
+      value = value[0];
+    }
+    setAccountObj({ ...accountObj, [name]: value });
+  };
+
+  const updateLibraryAccount = async () => {
+    console.log(accountObj);
+    await fetch(`http://localhost:8080/update/${data.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(accountObj),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setAccountObj({ ...data });
+      })
+      .catch((error) => console.log("Something went wrong", error));
+    if (edit) {
+      setEdit(!edit);
+    }
   };
 
   return (
@@ -21,82 +62,167 @@ const AccountComponent = ({ data }) => {
         <div>
           <label>
             First Name
-            <input defaultValue={data.firstName} disabled={edit} />
+            <input
+              name="firstName"
+              defaultValue={data.firstName}
+              disabled={edit}
+              onChange={handleInput}
+            />
           </label>
         </div>
         <div>
           <label>
             Last Name
-            <input defaultValue={data.lastName} disabled={edit} />
+            <input
+              name="lastName"
+              defaultValue={data.lastName}
+              disabled={edit}
+              onChange={handleInput}
+            />
           </label>
         </div>
         <div>
           <label>
             Barcode
-            <input defaultValue={data.libraryAccountNumber} disabled={edit} />
+            <input
+              name="barcode"
+              defaultValue={data.libraryAccountNumber}
+              disabled={edit}
+              onChange={handleInput}
+            />
           </label>
         </div>
         <div>
           <label>
             Email
-            <input defaultValue={data.email} disabled={edit} />
+            <input
+              name="email"
+              type="email"
+              defaultValue={data.email}
+              disabled={edit}
+              onChange={handleInput}
+            />
           </label>
         </div>
         <div>
           <label>
             Telephone
-            <input defaultValue={data.telephone} disabled={edit} />
+            <input
+              name="telephone"
+              type="tel"
+              defaultValue={data.telephone}
+              disabled={edit}
+              onChange={handleInput}
+            />
           </label>
         </div>
         <div>
           <label>
-            Library Account Type
-            <input disabled={edit} />
+            Account type
+            <select name="accountType" disabled={edit} onChange={handleSelect}>
+              {constants.ACCOUNT_TYPE.map((accountType, index) => (
+                <option key={index} value={accountType.id}>
+                  {accountType.label}
+                </option>
+              ))}
+            </select>
           </label>
         </div>
         <div>
           <label>
             Street Address
-            <input defaultValue={data.street} disabled={edit} />
+            <input
+              name="street"
+              defaultValue={data.street}
+              disabled={edit}
+              onChange={handleInput}
+            />
           </label>
         </div>
         <div>
           <label>
             Street Address 2
-            <input defaultValue={data.street2} disabled={edit} />
+            <input
+              name="street2"
+              defaultValue={data.street2}
+              disabled={edit}
+              onChange={handleInput}
+            />
           </label>
         </div>
         <div>
           <label>
             City
-            <input defaultValue={data.city} disabled={edit} />
+            <input
+              name="city"
+              defaultValue={data.city}
+              disabled={edit}
+              onChange={handleInput}
+            />
           </label>
         </div>
         <div>
           <label>
             State
-            <input disabled={edit} />
+            <select name="state" disabled={edit} onChange={handleSelect}>
+              {constants.STATE_LIST.map((state, index) => (
+                <option key={index} value={state}>
+                  {state}
+                </option>
+              ))}
+            </select>
           </label>
         </div>
         <div>
           <label>
             Zip Code
-            <input defaultValue={data.zipCode} disabled={edit} />
+            <input
+              name="zipCode"
+              defaultValue={data.zipCode}
+              disabled={edit}
+              onChange={handleInput}
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            County
+            <select name="county" disabled={edit} onChange={handleSelect}>
+              {constants.COUNTY_LIST.map((county, index) => (
+                <option key={index} value={county.id}>
+                  {county.label}
+                </option>
+              ))}
+            </select>
           </label>
         </div>
         <div>
           <label>
             ID Number
-            <input defaultValue={data.driverLicenseNumber} disabled={edit} />
+            <input
+              name="idNumber"
+              defaultValue={data.idNumber}
+              disabled={edit}
+              onChange={handleInput}
+            />
           </label>
         </div>
         <div>
           <label>
             Birth Date
-            <input defaultValue={data.birthDate} disabled={edit} />
+            <input
+              name="birthdate"
+              defaultValue={data.birthdate}
+              disabled={edit}
+              onChange={handleInput}
+            />
           </label>
         </div>
-        {!edit && <button type="button" onClick={updateLibraryAccount} />}
+        {!edit && (
+          <button type="button" onClick={updateLibraryAccount}>
+            Update Account
+          </button>
+        )}
       </div>
     </div>
   );

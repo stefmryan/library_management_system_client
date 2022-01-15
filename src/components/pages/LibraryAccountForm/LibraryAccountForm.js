@@ -7,10 +7,9 @@ const LibraryAccountForm = () => {
   const [accountObj, setAccountObj] = useState({
     libraryAccountNumber: 0,
     email: "",
-    handle: "",
     firstName: "",
     lastName: "",
-    driverLicenseNumber: "",
+    idNumber: "",
     birthdate: "",
     telephone: "",
     street: "",
@@ -57,8 +56,6 @@ const LibraryAccountForm = () => {
       );
       value = value[0];
     }
-
-    console.log(value);
     setAccountObj({ ...accountObj, [name]: value });
   };
 
@@ -154,12 +151,8 @@ const LibraryAccountForm = () => {
         <div className={styles.row}>
           <div className={styles.column}>
             <label>
-              Driver License Number
-              <input
-                name="driverLicenseNumber"
-                type="text"
-                onChange={handleInput}
-              />
+              ID Number
+              <input name="idNumber" type="text" onChange={handleInput} />
             </label>
           </div>
           <div className={styles.column}>
@@ -194,12 +187,6 @@ const LibraryAccountForm = () => {
                   </option>
                 ))}
               </select>
-            </label>
-          </div>
-          <div className={styles.column}>
-            <label>
-              Handle
-              <input name="handle" type="text" onChange={handleInput} />
             </label>
           </div>
         </div>
