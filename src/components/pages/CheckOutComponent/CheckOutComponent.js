@@ -12,6 +12,7 @@ const CheckOutComponent = () => {
   const [showBookTable, setShowBookTable] = useState(false);
   const [showButton, setShowButton] = useState(true);
   const [itemBarcode, setItemBarcode] = useState("");
+  const [renew, setRenew] = useState({});
   const itemRef = useRef();
   const accountRef = useRef();
 
@@ -49,6 +50,17 @@ const CheckOutComponent = () => {
       setShowBookTable(true);
     }
   }, [showAccount]);
+
+  useEffect(() => {
+    if (checkedOutItem.length > 0) {
+      const renewedBarcode = renew.barcode;
+      const newArr = checkedOutItem.filter(
+        (item) => item.barcode !== renewedBarcode
+      );
+      newArr.push(renew);
+      setCheckedOutItem([...newArr]);
+    }
+  }, [renew]);
 
   /**
    * sets itembarcode from item input
@@ -145,7 +157,11 @@ const CheckOutComponent = () => {
                   <th>Due Date</th>
                   <th>Renew Item</th>
                 </tr>
-                <BookTable items={checkedOutItem} />
+                <BookTable
+                  items={checkedOutItem}
+                  renew={renew}
+                  setRenew={setRenew}
+                />
               </thead>
             </table>
           </div>

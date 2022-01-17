@@ -1,13 +1,27 @@
 import React from "react";
+import { useState } from "react/cjs/react.development";
 // import styles from "../BookTable/BookTable.module.css";
 
-const BookTable = ({ items }) => {
-  // useEffect(() => {
-  //   console.log(items);
-  // }, [items]);
+const BookTable = ({ items, setRenew }) => {
+  const [error, setError] = useState(false);
 
-  const handleRenew = (id) => {
-    console.log(id);
+  const handleRenew = async (id) => {
+    await fetch(`http://localhost:8080/renew/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          setError(true);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setRenew({ ...data });
+      })
+      .catch((error) => console.log("Something went wrong", error));
   };
 
   return items.map((item) => (
@@ -21,6 +35,7 @@ const BookTable = ({ items }) => {
           Renew Item
         </button>
       </td>
+      {error && <td>Item cannot be renewed</td>}
     </tr>
   ));
 };
