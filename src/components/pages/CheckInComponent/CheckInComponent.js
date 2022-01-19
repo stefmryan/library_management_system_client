@@ -39,12 +39,17 @@ const CheckInComponent = () => {
     <div className={styles.container}>
       <label>
         Check In Item
-        <input type="number" ref={inputRef} onKeyDown={handleInput} />
+        <input
+          type="number"
+          data-testid="checkInInput"
+          ref={inputRef}
+          onKeyDown={handleInput}
+        />
       </label>
-      <button type="button" onClick={handleCheckin}>
+      <button type="button" data-testid="checkInBtn" onClick={handleCheckin}>
         Check In
       </button>
-      <table>
+      <table data-testid="checkInTable">
         <thead>
           <tr>
             <th>Barcode</th>
