@@ -12,8 +12,8 @@ function App() {
   return (
     <div className={styles.container}>
       <Router>
+        {/*add conditional for if logged in and what role.*/}
         <Navigation />
-
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/register" element={<LibraryAccountForm />} />
