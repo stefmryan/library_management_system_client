@@ -76,13 +76,16 @@ const CheckOutComponent = () => {
    * table.
    */
   const handleCheckOut = async () => {
-    await fetch(`http://localhost:8080/checkout/${itemBarcode}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(accountObj),
-    })
+    await fetch(
+      `http://localhost:8080/library-accounts/checkout/${itemBarcode}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(accountObj),
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         setCheckedOutItem([...checkedOutItem, data]);
