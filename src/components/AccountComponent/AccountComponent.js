@@ -56,6 +56,7 @@ const AccountComponent = ({ data }) => {
       <FontAwesomeIcon
         icon={faEdit}
         className={styles.icon}
+        data-testid="edit-icon"
         onClick={() => setEdit(!edit)}
       />
       <div className={styles.gridcontainer}>
@@ -67,6 +68,7 @@ const AccountComponent = ({ data }) => {
               defaultValue={data.firstName}
               disabled={edit}
               onChange={handleInput}
+              data-testid="firstName"
             />
           </label>
         </div>
@@ -78,6 +80,7 @@ const AccountComponent = ({ data }) => {
               defaultValue={data.lastName}
               disabled={edit}
               onChange={handleInput}
+              data-testid="lastName"
             />
           </label>
         </div>
@@ -89,7 +92,14 @@ const AccountComponent = ({ data }) => {
               defaultValue={data.libraryAccountNumber}
               disabled={edit}
               onChange={handleInput}
+              data-testid="barcode"
             />
+          </label>
+        </div>
+        <div>
+          <label>
+            County
+            <input defaultValue={data.county} disabled={edit} />
           </label>
         </div>
         <div>
@@ -101,6 +111,7 @@ const AccountComponent = ({ data }) => {
               defaultValue={data.email}
               disabled={edit}
               onChange={handleInput}
+              data-testid="email"
             />
           </label>
         </div>
@@ -113,6 +124,7 @@ const AccountComponent = ({ data }) => {
               defaultValue={data.telephone}
               disabled={edit}
               onChange={handleInput}
+              data-testid="telephone"
             />
           </label>
         </div>
@@ -136,6 +148,7 @@ const AccountComponent = ({ data }) => {
               defaultValue={data.street}
               disabled={edit}
               onChange={handleInput}
+              data-testid="street1"
             />
           </label>
         </div>
@@ -147,6 +160,7 @@ const AccountComponent = ({ data }) => {
               defaultValue={data.street2}
               disabled={edit}
               onChange={handleInput}
+              data-testid="street2"
             />
           </label>
         </div>
@@ -158,6 +172,7 @@ const AccountComponent = ({ data }) => {
               defaultValue={data.city}
               disabled={edit}
               onChange={handleInput}
+              data-testid="city"
             />
           </label>
         </div>
@@ -181,6 +196,7 @@ const AccountComponent = ({ data }) => {
               defaultValue={data.zipCode}
               disabled={edit}
               onChange={handleInput}
+              data-testid="zipCode"
             />
           </label>
         </div>
@@ -203,6 +219,7 @@ const AccountComponent = ({ data }) => {
               name="idNumber"
               defaultValue={data.idNumber}
               disabled={edit}
+              data-testid="idNumber"
               onChange={handleInput}
             />
           </label>
@@ -215,11 +232,16 @@ const AccountComponent = ({ data }) => {
               defaultValue={data.birthdate}
               disabled={edit}
               onChange={handleInput}
+              data-testid="birthDate"
             />
           </label>
         </div>
         {!edit && (
-          <button type="button" onClick={updateLibraryAccount}>
+          <button
+            data-testid="update-btn"
+            type="button"
+            onClick={updateLibraryAccount}
+          >
             Update Account
           </button>
         )}
