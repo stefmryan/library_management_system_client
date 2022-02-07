@@ -6,22 +6,30 @@ const Navigation = () => {
   return (
     <div className={styles.container}>
       <div>
-        <Link to="/checkout" className={styles.link}>
+        <Link
+          to="/checkout"
+          data-testid="checkout-link"
+          className={styles.link}
+        >
           Checkout
         </Link>
       </div>
       <div>
-        <Link to="/checkin" className={styles.link}>
+        <Link to="/checkin" data-testid="checkin-link" className={styles.link}>
           Checkin
         </Link>
       </div>
       <div>
-        <Link to="/register" className={styles.link}>
+        <Link
+          to="/register"
+          data-testid="register-link"
+          className={styles.link}
+        >
           Create a New Account
         </Link>
       </div>
       <div>
-        <Link to="/search" className={styles.link}>
+        <Link to="/search" data-testid="search-link" className={styles.link}>
           Find An Item
         </Link>
       </div>

@@ -5,11 +5,8 @@ import CheckInComponent from "./CheckInComponent";
 describe("CheckInComponent", () => {
   test("Component Renders", () => {
     render(<CheckInComponent />);
-
-    const input = screen.getByTestId("checkInInput");
-    const btn = screen.getByTestId("checkInBtn");
-    expect(input).toBeInTheDocument();
-    expect(btn).toBeInTheDocument();
+    expect(screen.getByTestId("checkInInput")).toBeInTheDocument();
+    expect(screen.getByTestId("checkInBtn")).toBeInTheDocument();
   });
 
   test("Entering a barcode number renders in table", () => {

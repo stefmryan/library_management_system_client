@@ -26,12 +26,16 @@ const BookTable = ({ items, setRenew }) => {
 
   return items.map((item) => (
     <tr key={item.id}>
-      <td>{item.barcode}</td>
-      <td>{item.title}</td>
-      <td>{item.author}</td>
-      <td>{item.dueDate}</td>
+      <td data-testid="barcode">{item.barcode}</td>
+      <td data-testid="title">{item.title}</td>
+      <td data-testid="author">{item.author}</td>
+      <td data-testid="dueDate">{item.dueDate}</td>
       <td>
-        <button type="button" onClick={() => handleRenew(item.id)}>
+        <button
+          type="button"
+          data-testid="renew-btn"
+          onClick={() => handleRenew(item.id)}
+        >
           Renew Item
         </button>
       </td>

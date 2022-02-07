@@ -123,6 +123,7 @@ const CheckOutComponent = () => {
             <input
               name="library-account"
               type="number"
+              data-testid="library-account-input"
               ref={accountRef}
               onChange={addLibraryAccount}
             />
