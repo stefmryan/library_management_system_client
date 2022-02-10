@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useEffect } from "react/cjs/react.development";
 import styles from "../CheckInComponent/CheckInComponent.module.css";
-import InMemoryJwtManager from "../../utilities/InMemoryJwtManager";
 
 const CheckInComponent = () => {
   const [barcodes, setBarcodes] = useState([]);
@@ -9,8 +8,6 @@ const CheckInComponent = () => {
 
   useEffect(() => {
     inputRef.current.value = "";
-    const token = InMemoryJwtManager.getToken();
-    console.log(token);
   }, [barcodes]);
 
   const handleInput = (e) => {

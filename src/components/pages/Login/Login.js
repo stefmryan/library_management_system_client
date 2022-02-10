@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-//import InMemoryJwtManager from "../../utilities/InMemoryJwtManager";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({});
