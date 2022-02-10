@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+//import InMemoryJwtManager from "../../utilities/InMemoryJwtManager";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({});
@@ -11,25 +12,18 @@ const Login = () => {
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-    console.log(credentials);
     if (credentials.username && credentials.password) {
       await fetch(`http://localhost:8080/authenticate`, {
         method: "POST",
+        credentials: "include",
         headers: {
+          "Access-Control-Allow-Origin": "http://localhost:3000",
           "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": "true",
         },
+
         body: JSON.stringify(credentials),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        // .then((data) => {
-        //   setCheckedOutItem([...checkedOutItem, data]);
-        //   itemRef.current.value = "";
-        // })
-        .catch((error) => console.log("Something went wrong", error));
-      // if (!showBookTable) {
-      //   setShowBookTable(true);
-      // }
+      });
     }
   };
   return (
