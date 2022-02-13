@@ -29,13 +29,16 @@ const CheckOutComponent = () => {
    * fetches library account from backend and sets the library account with values retrieved.
    */
   const handleLibraryAccount = async () => {
-    await fetch(`http://localhost:8080/library-accounts/${libraryAccount}`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    await fetch(
+      `http://localhost:8080/library-accounts/account?id=${libraryAccount}`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         setAccountObj({ ...data });
@@ -77,16 +80,14 @@ const CheckOutComponent = () => {
    * table.
    */
   const handleCheckOut = async () => {
-    await fetch(
-      `http://localhost:8080/library-accounts/checkout/${itemBarcode}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(accountObj),
-      }
-    )
+    await fetch(`http://localhost:8080/checkout/${itemBarcode}`, {
+      method: "PUT",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(accountObj),
+    })
       .then((response) => response.json())
       .then((data) => {
         setCheckedOutItem([...checkedOutItem, data]);
@@ -120,10 +121,10 @@ const CheckOutComponent = () => {
       <div id="checkOut" className={styles.container}>
         <div className={styles.input_div}>
           <label>
-            Library Account Number
+            Library Account Number or Name
             <input
               name="library-account"
-              type="number"
+              type="text"
               data-testid="library-account-input"
               ref={accountRef}
               onChange={addLibraryAccount}
