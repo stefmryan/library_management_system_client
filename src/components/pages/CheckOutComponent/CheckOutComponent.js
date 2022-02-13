@@ -31,6 +31,7 @@ const CheckOutComponent = () => {
   const handleLibraryAccount = async () => {
     await fetch(`http://localhost:8080/library-accounts/${libraryAccount}`, {
       method: "GET",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
