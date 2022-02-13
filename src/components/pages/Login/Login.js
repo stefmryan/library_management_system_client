@@ -16,9 +16,7 @@ const Login = () => {
         method: "POST",
         credentials: "include",
         headers: {
-          "Access-Control-Allow-Origin": "http://localhost:3000",
           "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": "true",
         },
 
         body: JSON.stringify(credentials),
