@@ -1,5 +1,5 @@
 const testData = {
-  mockLibraryAccount: {
+  mockLibraryAccounts: {
     id: 1,
     libraryAccountNumber: 12345,
     email: "bookwormBetty@fakeEmail.com",
@@ -20,16 +20,7 @@ const testData = {
     accountType: {
       label: "Adult",
     },
-    books: [
-      {
-        id: 1,
-        barcode: 98765432,
-        title: "The Fault In Our Stars",
-        author: "John Green",
-        dueDate: "2022-01-26",
-        available: false,
-      },
-    ],
+    books: [],
   },
 };
 

@@ -3,10 +3,14 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
+import { server } from "./__mocks__/server";
 
-// src/mocks/server.js
-import { setupServer } from "msw/node";
-import { handlers } from "../src/__mocks__/handlers";
+// Start the server before all tests.
+beforeAll(() => server.listen());
 
-// This configures a request mocking server with the given request handlers.
-export const server = setupServer(...handlers);
+// Reset any handlers that we may add during individual tests,
+// so they don't affect other tests.
+afterEach(() => server.resetHandlers());
+
+// Stop the server after all tests have run.
+afterAll(() => server.close());

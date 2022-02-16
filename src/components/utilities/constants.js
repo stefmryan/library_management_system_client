@@ -86,6 +86,7 @@ const constants = {
     },
   },
   CONFIRMATION_TEXT: "Confirm Account?",
+  BASE_PATH: "http://localhost:8080",
   ADD_LIBRARY_ACCOUNT_ENDPOINT: "http://localhost:8080/register",
   GET_LIBRARY_ACCOUNT_ENDPOINT: "http://localhost:8080/library-accounts",
 };

@@ -29,8 +29,8 @@ const CheckOutComponent = () => {
    * fetches library account from backend and sets the library account with values retrieved.
    */
   const handleLibraryAccount = async () => {
-    await fetch(
-      `http://localhost:8080/library-accounts/account?id=${libraryAccount}`,
+    const response = await fetch(
+      `${constants.BASE_PATH}/library-accounts/account?id=${libraryAccount}`,
       {
         method: "GET",
         credentials: "include",
@@ -38,14 +38,15 @@ const CheckOutComponent = () => {
           "Content-Type": "application/json",
         },
       }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setAccountObj({ ...data });
-        setShowAccount(true);
-        setShowButton(false);
-      })
-      .catch((error) => console.log("Something went wrong", error));
+    );
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      setAccountObj({ ...data });
+      setShowAccount(true);
+      setShowButton(false);
+    }
+    // .catch((error) => console.log("Something went wrong", error));
   };
 
   useEffect(() => {
@@ -121,7 +122,7 @@ const CheckOutComponent = () => {
       <div id="checkOut" className={styles.container}>
         <div className={styles.input_div}>
           <label>
-            Library Account Number or Name
+            Library Card Barcode or Patron Name
             <input
               name="library-account"
               type="text"
@@ -131,7 +132,11 @@ const CheckOutComponent = () => {
             />
           </label>
           {showButton && (
-            <button type="button" onClick={handleLibraryAccount}>
+            <button
+              data-testid="get-account-btn"
+              type="button"
+              onClick={handleLibraryAccount}
+            >
               Library Account
             </button>
           )}
@@ -148,7 +153,9 @@ const CheckOutComponent = () => {
               />
             </label>
 
-            <button onClick={handleCheckOut}>Check Out Item</button>
+            <button data-testid="checkout-item-btn" onClick={handleCheckOut}>
+              Check Out Item
+            </button>
           </div>
         )}
         <div>{showAccount && <AccountComponent data={accountObj} />}</div>
