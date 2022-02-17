@@ -25,4 +25,19 @@ describe("CheckOutComponent", () => {
     expect(screen.getByTestId("firstName")).toHaveValue("Betty");
     expect(screen.getByTestId("checkout-item-btn")).toBeInTheDocument();
   });
+  test("adding not existing library account number/name returns Not Found", async () => {
+    render(<CheckOutComponent />);
+    const accountInput = screen.getByTestId("library-account-input");
+    const getAcctBtn = screen.getByTestId("get-account-btn");
+    expect(accountInput).toBeInTheDocument();
+    expect(getAcctBtn).toBeInTheDocument();
+
+    fireEvent.change(accountInput, { target: { value: "Not Found" } });
+    fireEvent.click(getAcctBtn);
+    expect(accountInput).toHaveValue("Not Found");
+
+    await waitFor(() =>
+      expect(screen.queryByText("Account Not Found")).toBeInTheDocument()
+    );
+  });
 });

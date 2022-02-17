@@ -3,9 +3,13 @@ import { rest } from "msw";
 import testData from "./testData";
 
 const getLibraryAccount = (req, res, ctx) => {
-  let acctString = req.url.searchParams.get("id");
-  const isAcctNumber = /\d/.test(acctString);
-  return res(ctx.status(200), ctx.json(testData.mockLibraryAccounts));
+  let acctString = req.url.searchParams.get("accountData");
+  if (acctString === "Not Found") {
+    return res(ctx.status(404));
+  }
+  if (acctString === "12345") {
+    return res(ctx.status(200), ctx.json(testData.mockLibraryAccounts));
+  }
 };
 
 export const handlers = [
