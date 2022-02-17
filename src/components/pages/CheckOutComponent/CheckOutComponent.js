@@ -12,6 +12,7 @@ const CheckOutComponent = () => {
   const [showBookTable, setShowBookTable] = useState(false);
   const [showButton, setShowButton] = useState(true);
   const [itemBarcode, setItemBarcode] = useState("");
+  const [accountNotFound, setAccountNotFound] = useState(false);
   const [renew, setRenew] = useState({});
   const itemRef = useRef();
   const accountRef = useRef();
@@ -30,7 +31,7 @@ const CheckOutComponent = () => {
    */
   const handleLibraryAccount = async () => {
     const response = await fetch(
-      `${constants.BASE_PATH}/library-accounts/account?id=${libraryAccount}`,
+      `${constants.BASE_PATH}/library-accounts/account?accountData=${libraryAccount}`,
       {
         method: "GET",
         credentials: "include",
@@ -41,10 +42,16 @@ const CheckOutComponent = () => {
     );
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
-      setAccountObj({ ...data });
-      setShowAccount(true);
-      setShowButton(false);
+      if (data.length === 1) {
+        setAccountObj({ ...data[0] });
+        setShowAccount(true);
+        setShowButton(false);
+      } else {
+        console.log("more than one account");
+      }
+    }
+    if (response.status === 404) {
+      setAccountNotFound(true);
     }
     // .catch((error) => console.log("Something went wrong", error));
   };
@@ -141,6 +148,7 @@ const CheckOutComponent = () => {
             </button>
           )}
         </div>
+        {accountNotFound && <span>Account Not Found</span>}
         {!showButton && (
           <div>
             <label>
