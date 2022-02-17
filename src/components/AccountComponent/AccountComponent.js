@@ -33,21 +33,18 @@ const AccountComponent = ({ data }) => {
   };
 
   const updateLibraryAccount = async () => {
-    console.log(accountObj);
-    await fetch(`http://localhost:8080/update/${data.id}`, {
+    const response = await fetch(`http://localhost:8080/update/${data.id}`, {
       method: "PUT",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(accountObj),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setAccountObj({ ...data });
-      })
-      .catch((error) => console.log("Something went wrong", error));
-    if (edit) {
-      setEdit(!edit);
+    });
+    if (response.ok) {
+      const data = await response.json();
+      setAccountObj({ ...data });
+      setEdit(false);
     }
   };
 
@@ -131,7 +128,12 @@ const AccountComponent = ({ data }) => {
         <div>
           <label>
             Account type
-            <select name="accountType" disabled={edit} onChange={handleSelect}>
+            <select
+              name="accountType"
+              data-testid="accountType"
+              disabled={edit}
+              onChange={handleSelect}
+            >
               {constants.ACCOUNT_TYPE.map((accountType, index) => (
                 <option key={index} value={accountType.id}>
                   {accountType.label}

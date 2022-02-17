@@ -5,7 +5,7 @@ import testData from "../../__mocks__/testData";
 
 describe("Account Component", () => {
   test("Component Renders", async () => {
-    render(<AccountComponent data={testData.mockLibraryAccount} />);
+    render(<AccountComponent data={testData.mockLibraryAccounts[0]} />);
     expect(
       await waitFor(() => screen.findByTestId("edit-icon"))
     ).toBeInTheDocument();
@@ -44,7 +44,7 @@ describe("Account Component", () => {
     ).not.toBeInTheDocument();
   });
   test("clicking on edit icon enables inputs", () => {
-    render(<AccountComponent data={testData.mockLibraryAccount} />);
+    render(<AccountComponent data={testData.mockLibraryAccounts[0]} />);
 
     const editBtn = screen.getByTestId("edit-icon");
     expect(editBtn).toBeDefined();
@@ -59,6 +59,30 @@ describe("Account Component", () => {
     expect(screen.getByTestId("street1")).toBeEnabled();
     expect(screen.getByTestId("street2")).toBeEnabled();
     expect(screen.getByTestId("city")).toBeEnabled();
+    expect(screen.getByTestId("accountType")).toBeEnabled();
     expect(screen.getByTestId("zipCode")).toBeEnabled();
+
+    const emailInput = screen.getByTestId("email");
+    const accountTypeSelect = screen.getByTestId("accountType");
+
+    fireEvent.change(emailInput, {
+      target: { value: "soItGoes@slaughterHousefive.com" },
+    });
+
+    fireEvent.change(accountTypeSelect, { target: { value: 2 } });
+
+    expect(emailInput).toHaveValue("soItGoes@slaughterHousefive.com");
+    expect(accountTypeSelect).toHaveDisplayValue(["Adult"]);
+  });
+  test("submitting form returns updated data", async () => {
+    render(<AccountComponent data={testData.mockLibraryAccounts[0]} />);
+
+    const editBtn = screen.getByTestId("edit-icon");
+    expect(editBtn).toBeDefined();
+    fireEvent.click(editBtn);
+
+    const updateBtn = screen.getByTestId("update-btn");
+    expect(updateBtn).toBeInTheDocument();
+    fireEvent.click(updateBtn);
   });
 });
