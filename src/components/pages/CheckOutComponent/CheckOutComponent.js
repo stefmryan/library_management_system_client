@@ -13,6 +13,8 @@ const CheckOutComponent = () => {
   const [showButton, setShowButton] = useState(true);
   const [itemBarcode, setItemBarcode] = useState("");
   const [accountNotFound, setAccountNotFound] = useState(false);
+  const [accountList, setAccountList] = useState([]);
+  const [listDiv, setListDiv] = useState(false);
   const [renew, setRenew] = useState({});
   const itemRef = useRef();
   const accountRef = useRef();
@@ -47,7 +49,8 @@ const CheckOutComponent = () => {
         setShowAccount(true);
         setShowButton(false);
       } else {
-        console.log("more than one account");
+        setAccountList([...data]);
+        setListDiv(true);
       }
     }
     if (response.status === 404) {
@@ -124,6 +127,13 @@ const CheckOutComponent = () => {
     setShowAccount(false);
   };
 
+  const handleAccount = (account) => {
+    setAccountObj({ ...account });
+    setShowAccount(true);
+    setShowButton(false);
+    setListDiv(false);
+  };
+
   return (
     <div>
       <div>{showAccount && <AccountComponent data={accountObj} />}</div>
@@ -149,7 +159,20 @@ const CheckOutComponent = () => {
             </button>
           )}
         </div>
-        {accountNotFound && <span>No Results</span>}
+        {accountNotFound && <span>{constants.NO_RESULTS}</span>}
+        {listDiv && (
+          <div>
+            {accountList.map((account) => (
+              <div key={account.id}>
+                <input type="checkbox" onClick={() => handleAccount(account)} />
+                <span>{account.firstName}</span>
+                <span>{account.lastName}</span>
+                <span>{account.libraryAccountNumber}</span>
+                <span>{account.birthdate}</span>
+              </div>
+            ))}
+          </div>
+        )}
         {!showButton && (
           <div>
             <label>
