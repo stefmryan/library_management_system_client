@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./Login.module.css";
 
 const Login = () => {
+  const history = useNavigate();
   const [credentials, setCredentials] = useState({});
 
   const handleLogin = (e) => {
@@ -12,25 +15,35 @@ const Login = () => {
   const handleSignIn = async (e) => {
     e.preventDefault();
     if (credentials.username && credentials.password) {
-      await fetch(`http://localhost:8080/authenticate`, {
+      const response = await fetch(`http://localhost:8080/authenticate`, {
         method: "POST",
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
-
         body: JSON.stringify(credentials),
       });
+      if (response.status === 200) {
+        sessionStorage.setItem("isLoggedIn", true);
+        history("/checkout");
+      }
     }
   };
   return (
-    <div>
+    <div className={styles.container}>
       <form>
+        <h3>Sign In</h3>
         <div>
-          <input type="email" name="username" onChange={handleLogin} />
+          <label>
+            Email
+            <input type="email" name="username" onChange={handleLogin} />
+          </label>
         </div>
         <div>
-          <input type="password" name="password" onChange={handleLogin} />
+          <label>
+            Password
+            <input type="password" name="password" onChange={handleLogin} />
+          </label>
         </div>
         <button onClick={handleSignIn}>Sign In</button>
       </form>

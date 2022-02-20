@@ -87,6 +87,7 @@ const constants = {
   },
   CONFIRMATION_TEXT: "Confirm Account?",
   NO_RESULTS: "No Results Found",
+  LOGOUT_STATEMENT: "Log Out?",
   BASE_PATH: "http://localhost:8080",
   ADD_LIBRARY_ACCOUNT_ENDPOINT: "http://localhost:8080/register",
   GET_LIBRARY_ACCOUNT_ENDPOINT: "http://localhost:8080/library-accounts",

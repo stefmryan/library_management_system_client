@@ -64,6 +64,28 @@ const LibraryAccountForm = () => {
     setConfirmationModal(true);
   };
 
+  const handleSubmit = async () => {
+    closeModal(false);
+    await fetch(constants.ADD_LIBRARY_ACCOUNT_ENDPOINT, {
+      credentials: "include",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(accountObj),
+    })
+      .then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+          console.log(response);
+          //comeback to this and refactor--take out false
+          closeModal(false);
+        } else {
+          console.log("Something went wrong");
+        }
+      })
+      .catch((error) => console.log("Something went wrong", error));
+  };
+
   return (
     <div>
       <div className={styles.container}>
@@ -195,7 +217,11 @@ const LibraryAccountForm = () => {
         </div>
       </div>
       {confirmationModal && (
-        <ConfirmationModal data={accountObj} closeModal={closeModal} />
+        <ConfirmationModal
+          handleFunc={handleSubmit}
+          closeModal={closeModal}
+          modalStatement={constants.CONFIRMATION_TEXT}
+        />
       )}
     </div>
   );

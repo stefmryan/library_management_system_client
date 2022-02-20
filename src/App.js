@@ -13,7 +13,7 @@ function App() {
     <div className={styles.container}>
       <Router>
         {/*add conditional for if logged in and what role.*/}
-        <Navigation />
+        <Navigation isLoggedIn={sessionStorage.getItem("isLoggedIn")} />
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/register" element={<LibraryAccountForm />} />

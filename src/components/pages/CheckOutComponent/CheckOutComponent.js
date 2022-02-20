@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AccountComponent from "../../AccountComponent/AccountComponent";
 import BookTable from "../../BookTable/BookTable";
 import constants from "../../utilities/constants";
 import styles from "../CheckOutComponent/CheckOutComponent.module.css";
 
 const CheckOutComponent = () => {
+  const navigate = useNavigate();
   const [libraryAccount, setLibraryAccount] = useState("");
   const [accountObj, setAccountObj] = useState(constants.LIBRARY_ACCOUNT_OBJ);
   const [checkedOutItem, setCheckedOutItem] = useState([]);
@@ -134,6 +136,10 @@ const CheckOutComponent = () => {
     setListDiv(false);
   };
 
+  const handleNavigation = () => {
+    navigate("/register");
+  };
+
   return (
     <div>
       <div>{showAccount && <AccountComponent data={accountObj} />}</div>
@@ -159,7 +165,14 @@ const CheckOutComponent = () => {
             </button>
           )}
         </div>
-        {accountNotFound && <span>{constants.NO_RESULTS}</span>}
+        {accountNotFound && (
+          <span>
+            {constants.NO_RESULTS}
+            <button type="button" onClick={handleNavigation}>
+              Add New Account?
+            </button>
+          </span>
+        )}
         {listDiv && (
           <div>
             {accountList.map((account) => (
