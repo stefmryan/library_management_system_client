@@ -126,6 +126,7 @@ const CheckOutComponent = () => {
 
   return (
     <div>
+      <div>{showAccount && <AccountComponent data={accountObj} />}</div>
       <div id="checkOut" className={styles.container}>
         <div className={styles.input_div}>
           <label>
@@ -148,7 +149,7 @@ const CheckOutComponent = () => {
             </button>
           )}
         </div>
-        {accountNotFound && <span>Account Not Found</span>}
+        {accountNotFound && <span>No Results</span>}
         {!showButton && (
           <div>
             <label>
@@ -166,7 +167,7 @@ const CheckOutComponent = () => {
             </button>
           </div>
         )}
-        <div>{showAccount && <AccountComponent data={accountObj} />}</div>
+
         {showBookTable && (
           <div className={styles.table_container}>
             <table>
