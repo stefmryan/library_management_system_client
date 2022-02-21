@@ -3,11 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import styles from "./SearchPage.module.css";
 import constants from "../../utilities/constants";
+import ItemCard from "../../ItemCard/ItemCard";
 
 const SearchPage = () => {
   const [titleText, setTitleText] = useState("");
   const [authorText, setAuthorText] = useState("");
   const [, /*searchList*/ setSearchList] = useState([]);
+  const [showSearchResults, setShowSearchResults] = useState(false);
 
   const handleSearch = async (e) => {
     let queryValue;
@@ -34,6 +36,7 @@ const SearchPage = () => {
       const data = response.json();
       console.log(data);
       setSearchList([data]);
+      setShowSearchResults(true);
     }
   };
 
@@ -55,6 +58,12 @@ const SearchPage = () => {
           <FontAwesomeIcon icon={faSearch} />
         </button>
       </label>
+
+      {showSearchResults && (
+        <div>
+          <ItemCard />
+        </div>
+      )}
     </div>
   );
 };
