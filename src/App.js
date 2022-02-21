@@ -6,7 +6,7 @@ import Navigation from "./components/Navigation/Navigation";
 import styles from "./App.module.css";
 import CheckInComponent from "../src/components/pages/CheckInComponent/CheckInComponent";
 import CheckOutComponent from "../src/components/pages/CheckOutComponent/CheckOutComponent";
-import FindAnItemComponent from "../src/components/pages/FindAnItemComponent/FindAnItemComponent";
+import SearchPage from "../src/components/pages/SearchPage/SearchPage";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
           <Route exact path="/register" element={<LibraryAccountForm />} />
           <Route exact path="/checkin" element={<CheckInComponent />} />
           <Route exact path="/checkout" element={<CheckOutComponent />} />
-          <Route exact path="/search" element={<FindAnItemComponent />} />
+          <Route exact path="/search" element={<SearchPage />} />
         </Routes>
       </Router>
     </div>

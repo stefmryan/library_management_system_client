@@ -1,0 +1,10 @@
+.container {
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  background-color: whitesmoke;
+  padding: 1.5em;
+  border-radius: 12px;
+}
